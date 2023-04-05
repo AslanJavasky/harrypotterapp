@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.ui.main
+package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
