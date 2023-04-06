@@ -16,13 +16,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 private const val TAG = "MainViewModel555"
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val reposotory: CharacterRepositoryImpl,
+    private val getCharacterListUseCase: GetCharacterListUseCase,
+    private val getCharacterUseCase: GetCharacterUseCase
+) :  ViewModel() {
 
-
-    private val reposotory = CharacterRepositoryImpl()
-
-    private val getCharacterListUseCase = GetCharacterListUseCase(reposotory)
-    private val getCharacterUseCase = GetCharacterUseCase(reposotory)
 
     private var _character: MutableStateFlow<CharacterModel> =
         MutableStateFlow<CharacterModel>(CharacterModel())
@@ -30,17 +29,19 @@ class MainViewModel : ViewModel() {
     private var _characterList: MutableStateFlow<List<CharacterModel>> =
         MutableStateFlow<List<CharacterModel>>(mutableListOf())
     var characterList = _characterList.asStateFlow()
+
     init {
         viewModelScope.launch {
             try {
                 _character.value = getCharacterUseCase.getCharacter()
-                _characterList.value=getCharacterListUseCase.getCharacterList()
+                _characterList.value = getCharacterListUseCase.getCharacterList()
             } catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)
             }
         }
     }
+
     fun randomCharacter() {
-        _character.value=_characterList.value.random()
+        _character.value = _characterList.value.random()
     }
 }

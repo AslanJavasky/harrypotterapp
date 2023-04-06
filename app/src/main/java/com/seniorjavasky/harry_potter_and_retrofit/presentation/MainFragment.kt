@@ -15,7 +15,9 @@ private const val TAG = "MainFragment555"
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory()
+    }
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
