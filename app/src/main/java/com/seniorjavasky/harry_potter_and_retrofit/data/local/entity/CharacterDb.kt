@@ -1,9 +1,6 @@
 package com.seniorjavasky.harry_potter_and_retrofit.data.local.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "character")
 data class CharacterDb(
@@ -11,9 +8,5 @@ data class CharacterDb(
     @ColumnInfo(name="id")
     val id: Int,
     @ColumnInfo(name="name")
-    val name: String ,
-//    @ColumnInfo(name="hogwarts_house")
-//    val hogwartsHouse: String,
-//    @ColumnInfo(name="image_url")
-//    val imageUrl: String
+    val name: String
 )
