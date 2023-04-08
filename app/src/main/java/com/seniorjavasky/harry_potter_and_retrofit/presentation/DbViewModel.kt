@@ -29,10 +29,11 @@ class DbViewModel : ViewModel() {
         var size = _characters.value.size
         size++
         viewModelScope.launch {
-//            characterDao.insert(
-//                CharacterDb(id = size, name = "Potter ${size}")
-//            )
-//            updateTextView()
+            characterDao.insert(
+                CharacterDb(id = size, name = "Potter ${size}",
+                    "Slytherin","image.url.png")
+            )
+            updateTextView()
         }
     }
 
@@ -59,9 +60,9 @@ class DbViewModel : ViewModel() {
     }
 
     private fun updateTextView() {
-//        viewModelScope.launch {
-//            _characters.value = characterDao.getAll()
-//        }
+        viewModelScope.launch {
+            _characters.value = characterDao.getAll()
+        }
     }
 
 }

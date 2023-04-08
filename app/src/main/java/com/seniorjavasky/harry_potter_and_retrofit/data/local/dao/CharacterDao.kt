@@ -6,9 +6,8 @@ import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDb
 @Dao
 interface CharacterDao {
 
-    @Transaction
     @Query("SELECT * FROM character")
-    suspend fun getAll(): List<WandWithCharacter>
+    suspend fun getAll(): List<CharacterDb>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(characterDb: CharacterDb)
