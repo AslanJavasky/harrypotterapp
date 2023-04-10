@@ -8,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentDbBinding
 import kotlinx.coroutines.launch
 
 class DbFragment : Fragment() {
+
+    private val args by navArgs<DbFragmentArgs>()
 
     private val viewModel: DbViewModel by viewModels()
 
@@ -30,16 +35,18 @@ class DbFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.initDao(requireActivity().application)
+        viewModel.initDao(activity?.application)
 
         binding.btnAdd.setOnClickListener { viewModel.onBtnAdd() }
         binding.btnUpdate.setOnClickListener { viewModel.onUpdateBtn()}
         binding.btnDelete.setOnClickListener { viewModel.onDeleteBtn()}
 
+        binding.textView.text=args.strHello
+
         lifecycleScope.launch {
-            viewModel.characters.collect {
-                binding.textView.text = it.joinToString(separator = "\r\n")
-            }
+//            viewModel.characters.collect {
+//                binding.textView.text = it.joinToString(separator = "\r\n")
+//            }
         }
     }
 
