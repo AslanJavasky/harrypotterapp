@@ -65,10 +65,6 @@ class MainFragment : Fragment() {
             viewModel.randomCharacter()
         }
 
-        binding.tvHouse.setOnClickListener {
-            findNavController().navigate(
-                MainFragmentDirections.actionMainFragmentToDbFragment())
-        }
 
     }
 

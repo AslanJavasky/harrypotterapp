@@ -5,7 +5,7 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.repository.CharacterRe
 import com.seniorjavasky.harry_potter_and_retrofit.data.network.mapper.CharacterMapper
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterModel
 
-class CharacterRepositoryImpl : CharacterRepository {
+object CharacterRepositoryImpl : CharacterRepository {
 
     private val mapper=CharacterMapper()
 

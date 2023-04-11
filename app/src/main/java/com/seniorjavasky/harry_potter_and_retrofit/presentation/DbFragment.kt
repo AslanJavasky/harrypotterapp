@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 class DbFragment : Fragment() {
 
-    private val args by navArgs<DbFragmentArgs>()
 
     private val viewModel: DbViewModel by viewModels()
 
@@ -41,7 +40,7 @@ class DbFragment : Fragment() {
         binding.btnUpdate.setOnClickListener { viewModel.onUpdateBtn()}
         binding.btnDelete.setOnClickListener { viewModel.onDeleteBtn()}
 
-        binding.textView.text=args.strHello
+
 
         lifecycleScope.launch {
 //            viewModel.characters.collect {

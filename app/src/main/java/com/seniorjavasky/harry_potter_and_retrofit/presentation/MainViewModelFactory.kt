@@ -11,7 +11,7 @@ class MainViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(MainViewModel::class.java)){
-            val repo=CharacterRepositoryImpl()
+            val repo=CharacterRepositoryImpl
             val useCase=GetCharacterUseCase(repo)
             val useCase2=GetCharacterListUseCase(repo)
             return MainViewModel(repo,useCase2,useCase) as T
