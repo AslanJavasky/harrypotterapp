@@ -5,4 +5,9 @@
     <string name="title_character">character</string>
     <string name="title_character_list">list of characters</string>
     <string name="checkbox_text">Only Slytherin</string>
+    <!-- Auth-->
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="auth_caterogy">Account</string>
 </resources>

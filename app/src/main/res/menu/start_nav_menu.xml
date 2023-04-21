@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/auth_caterory"
+        android:title="@string/auth_caterogy">
+        <menu>
+            <item
+                android:id="@+id/drawer_sign_up"
+                android:title="@string/sign_up"/>
+            <item
+                android:id="@+id/drawer_sign_in"
+                android:title="@string/sign_in" />
+            <item
+                android:id="@+id/drawer_sign_out"
+                android:title="@string/sign_out" />
+        </menu>
+    </item>
+
+</menu>
