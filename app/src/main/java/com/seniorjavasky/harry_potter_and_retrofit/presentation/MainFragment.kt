@@ -10,6 +10,7 @@ import androidx.fragment.app.*
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentMainBinding
 import kotlinx.coroutines.launch
@@ -62,7 +63,14 @@ class MainFragment : Fragment() {
         }
 
         binding.btnRandomCharacter.setOnClickListener {
-            viewModel.randomCharacter()
+//            viewModel.randomCharacter()
+
+            FirebaseCrashlytics.getInstance().log("This log method with extra info")
+            try {
+                throw Exception("My first exception")
+            }catch (e:Exception){
+                FirebaseCrashlytics.getInstance().recordException(e)
+            }
         }
 
 
