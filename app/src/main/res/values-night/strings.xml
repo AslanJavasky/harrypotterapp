@@ -10,4 +10,10 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
     <string name="auth_caterogy">Account</string>
+    <string name="tv_forget_pasword_text">Have you forgotten your password?</string>
+    <string name="tv_sign_up">Please, sign up!</string>
+    <string name="tv_sign_in">Please, sign in!</string>
+    <string name="ed_email_hint">Email</string>
+    <string name="ed_password_hint">Password</string>
+    <string name="btn_sign_up">Sign Up</string>
 </resources>

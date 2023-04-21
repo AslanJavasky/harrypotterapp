@@ -1,22 +1,16 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainBinding
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.auth.SignDialogUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,10 +32,12 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
 
                 R.id.drawer_sign_up -> {
-                    Toast.makeText(this, "SignUp", Toast.LENGTH_LONG).show()
+                    SignDialogUtils(this)
+                        .showAlertDialog(SignDialogUtils.TYPE_SIGN_UP)
                 }
                 R.id.drawer_sign_in -> {
-                    Toast.makeText(this, "SignIn", Toast.LENGTH_LONG).show()
+                    SignDialogUtils(this)
+                        .showAlertDialog(SignDialogUtils.TYPE_SIGN_IN)
                 }
                 R.id.drawer_sign_out -> {
                     Toast.makeText(this, "SignOut", Toast.LENGTH_LONG).show()
