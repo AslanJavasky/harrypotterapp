@@ -14,6 +14,9 @@ class SignDialogUtils(
 
     val binding = SignDialogBinding.inflate(context.layoutInflater)
     val view = binding.root
+    val alertDialog = AlertDialog.Builder(context)
+        .setView(view)
+        .create()
 
     fun showAlertDialog(type: String) {
         when (type) {
@@ -30,28 +33,25 @@ class SignDialogUtils(
                     context.resources.getString(R.string.sign_in)
             }
         }
-
-        AlertDialog.Builder(context)
-            .setView(view)
-            .show()
+        alertDialog.show()
 
         binding.btnSign.setOnClickListener {
             val email = binding.edEmail.text.toString()
             val password = binding.edPassword.text.toString()
             val isEmailAndPaswordNotEmpty = email.isNotEmpty() && password.isNotEmpty()
-            when (type) {
-                TYPE_SIGN_UP -> {
-                    if (isEmailAndPaswordNotEmpty) {
+            if (isEmailAndPaswordNotEmpty) {
+                when (type) {
+                    TYPE_SIGN_UP -> {
                         authUtils.signUpWithEmail(email, password)
+
                     }
-                }
-                TYPE_SIGN_IN -> {
+                    TYPE_SIGN_IN -> {
+
+                    }
 
                 }
-
             }
-
-
+            alertDialog.dismiss()
         }
     }
 
