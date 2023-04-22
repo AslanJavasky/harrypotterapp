@@ -46,7 +46,7 @@ class SignDialogUtils(
 
                     }
                     TYPE_SIGN_IN -> {
-
+                        authUtils.signInWithEmail(email, password)
                     }
 
                 }
@@ -54,6 +54,8 @@ class SignDialogUtils(
             alertDialog.dismiss()
         }
     }
+
+
 
     companion object {
 

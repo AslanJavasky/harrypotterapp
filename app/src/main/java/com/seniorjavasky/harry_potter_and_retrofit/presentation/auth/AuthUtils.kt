@@ -30,6 +30,25 @@ class AuthUtils(
                 }
     }
 
+
+
+    fun signInWithEmail(email: String, password: String) {
+        val user =
+            context.auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        showToast(R.string.msg_sign_in)
+                    }else{
+                        showToast(R.string.msg_sign_in_error)
+                    }
+                }
+    }
+
+    fun signOut() {
+        context.auth.signOut()
+        showToast(R.string.msg_sign_out)
+    }
+
     private fun showToast(@StringRes str:Int) {
         Toast.makeText(
             context,

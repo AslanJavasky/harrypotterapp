@@ -12,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.auth.AuthUtils
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.auth.SignDialogUtils
 
 class MainActivity : AppCompatActivity() {
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                         .showAlertDialog(SignDialogUtils.TYPE_SIGN_IN)
                 }
                 R.id.drawer_sign_out -> {
-                    auth.signOut()
+                    AuthUtils(this).signOut()
                 }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START)

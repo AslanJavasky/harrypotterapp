@@ -18,5 +18,8 @@
     <string name="msg_user_creation_failed">User creation failed!</string>
     <string name="msg_verification_success">Verification was successful! Check your email!</string>
     <string name="msg_verification_failed">Verification error!</string>
+    <string name="msg_sign_in">You have successfully signed in to your account</string>
+    <string name="msg_sign_in_error">Sign in error!</string>
+    <string name="msg_sign_out">Your are signed out of your account</string>
 
 </resources>
