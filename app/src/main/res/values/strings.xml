@@ -9,7 +9,7 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
     <string name="auth_caterogy">Account</string>
-    <string name="tv_forget_pasword_text">Have you forgotten your password?</string>
+    <string name="tv_forget_pasword_text"><u>Have you forgotten your password?</u></string>
     <string name="tv_sign_up">Please, sign up!</string>
     <string name="tv_sign_in">Please, sign in!</string>
     <string name="ed_email_hint">Email</string>
@@ -21,5 +21,7 @@
     <string name="msg_sign_in">You have successfully signed in to your account</string>
     <string name="msg_sign_in_error">Sign in error!</string>
     <string name="msg_sign_out">Your are signed out of your account</string>
+    <string name="msg_reset_password">Password reset</string>
+    <string name="msg_reset_password_error">Error of pasword reset</string>
 
 </resources>

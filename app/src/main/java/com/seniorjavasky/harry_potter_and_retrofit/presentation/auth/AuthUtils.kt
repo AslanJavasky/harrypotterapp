@@ -48,6 +48,21 @@ class AuthUtils(
         context.auth.signOut()
         showToast(R.string.msg_sign_out)
     }
+    fun resetPasswordForEmail(email: String) {
+        context.auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful){
+                    showToast(R.string.msg_reset_password)
+                }else{
+                    showToast(R.string.msg_reset_password_error)
+                }
+
+            }
+
+    }
+
+
+
 
     private fun showToast(@StringRes str:Int) {
         Toast.makeText(
@@ -56,4 +71,6 @@ class AuthUtils(
             Toast.LENGTH_LONG
         ).show()
     }
+
+
 }

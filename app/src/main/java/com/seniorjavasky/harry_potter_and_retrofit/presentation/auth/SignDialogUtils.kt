@@ -1,6 +1,7 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation.auth
 
 
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.SignDialogBinding
@@ -25,12 +26,14 @@ class SignDialogUtils(
                     context.resources.getString(R.string.tv_sign_up)
                 binding.btnSign.text =
                     context.resources.getString(R.string.sign_up)
+                binding.tvForgotPasword.visibility = View.GONE
             }
             TYPE_SIGN_IN -> {
                 binding.tvForSign.text =
                     context.resources.getString(R.string.tv_sign_in)
                 binding.btnSign.text =
                     context.resources.getString(R.string.sign_in)
+                binding.tvForgotPasword.visibility = View.VISIBLE
             }
         }
         alertDialog.show()
@@ -53,8 +56,15 @@ class SignDialogUtils(
             }
             alertDialog.dismiss()
         }
-    }
+        binding.tvForgotPasword.setOnClickListener {
+            val email=binding.edEmail.text.toString()
+            if (email.isNotEmpty()){
+                authUtils.resetPasswordForEmail(email)
+            }
 
+
+        }
+    }
 
 
     companion object {
