@@ -8,6 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.auth.SignDialogUtils
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWithDrawerBinding
     private lateinit var navController: NavController
+
+    val auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                         .showAlertDialog(SignDialogUtils.TYPE_SIGN_IN)
                 }
                 R.id.drawer_sign_out -> {
-                    Toast.makeText(this, "SignOut", Toast.LENGTH_LONG).show()
+                    auth.signOut()
                 }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START)

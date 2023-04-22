@@ -10,20 +10,23 @@ class SignDialogUtils(
     val context: MainActivity
 ) {
 
+    val authUtils = AuthUtils(context)
+
     val binding = SignDialogBinding.inflate(context.layoutInflater)
     val view = binding.root
+
     fun showAlertDialog(type: String) {
-        when(type){
+        when (type) {
             TYPE_SIGN_UP -> {
-                binding.tvForSign.text=
+                binding.tvForSign.text =
                     context.resources.getString(R.string.tv_sign_up)
-                binding.btnSign.text=
+                binding.btnSign.text =
                     context.resources.getString(R.string.sign_up)
             }
             TYPE_SIGN_IN -> {
-                binding.tvForSign.text=
+                binding.tvForSign.text =
                     context.resources.getString(R.string.tv_sign_in)
-                binding.btnSign.text=
+                binding.btnSign.text =
                     context.resources.getString(R.string.sign_in)
             }
         }
@@ -31,6 +34,25 @@ class SignDialogUtils(
         AlertDialog.Builder(context)
             .setView(view)
             .show()
+
+        binding.btnSign.setOnClickListener {
+            val email = binding.edEmail.text.toString()
+            val password = binding.edPassword.text.toString()
+            val isEmailAndPaswordNotEmpty = email.isNotEmpty() && password.isNotEmpty()
+            when (type) {
+                TYPE_SIGN_UP -> {
+                    if (isEmailAndPaswordNotEmpty) {
+                        authUtils.signUpWithEmail(email, password)
+                    }
+                }
+                TYPE_SIGN_IN -> {
+
+                }
+
+            }
+
+
+        }
     }
 
     companion object {
