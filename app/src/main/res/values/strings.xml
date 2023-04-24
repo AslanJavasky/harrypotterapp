@@ -15,13 +15,10 @@
     <string name="ed_email_hint">Email</string>
     <string name="ed_password_hint">Password</string>
     <string name="btn_sign_up">Sign Up</string>
-    <string name="msg_user_creation_failed">User creation failed!</string>
     <string name="msg_verification_success">Verification was successful! Check your email!</string>
-    <string name="msg_verification_failed">Verification error!</string>
     <string name="msg_sign_in">You have successfully signed in to your account</string>
-    <string name="msg_sign_in_error">Sign in error!</string>
     <string name="msg_sign_out">Your are signed out of your account</string>
     <string name="msg_reset_password">Password reset</string>
-    <string name="msg_reset_password_error">Error of pasword reset</string>
+    <string name="msg_link_account">Email successfully linked to Google account</string>
 
 </resources>

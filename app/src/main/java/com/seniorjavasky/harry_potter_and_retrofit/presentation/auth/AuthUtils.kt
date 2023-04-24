@@ -5,6 +5,8 @@ import androidx.annotation.StringRes
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.MainActivity
@@ -35,11 +37,21 @@ class AuthUtils(
                                 if (task.isSuccessful) {
                                     showToast(R.string.msg_verification_success)
                                 } else {
-                                    showToast(R.string.msg_verification_failed)
+                                    showErrorToast(task.exception?.localizedMessage)
                                 }
                             }
                     } else {
-                        showToast(R.string.msg_user_creation_failed)
+
+                        if (task.exception is FirebaseAuthUserCollisionException) {
+                            val credential =
+                                EmailAuthProvider.getCredential(email, password)
+                            context.auth.currentUser?.linkWithCredential(credential)
+                            showToast(R.string.msg_link_account)
+                        } else {
+                            showErrorToast(task.exception?.localizedMessage)
+                        }
+
+
                     }
                 }
     }
@@ -52,13 +64,14 @@ class AuthUtils(
                     if (task.isSuccessful) {
                         showToast(R.string.msg_sign_in)
                     } else {
-                        showToast(R.string.msg_sign_in_error)
+                        showErrorToast(task.exception?.localizedMessage)
                     }
                 }
     }
 
     fun signOut() {
         context.auth.signOut()
+        googleClient.signOut()
         showToast(R.string.msg_sign_out)
     }
 
@@ -68,9 +81,8 @@ class AuthUtils(
                 if (task.isSuccessful) {
                     showToast(R.string.msg_reset_password)
                 } else {
-                    showToast(R.string.msg_reset_password_error)
+                    showErrorToast(task.exception?.localizedMessage)
                 }
-
             }
 
     }
@@ -89,7 +101,7 @@ class AuthUtils(
                     if (task.isSuccessful) {
                         showToast(R.string.msg_sign_in)
                     } else {
-                        showToast(R.string.msg_sign_in_error)
+                        showErrorToast(task.exception?.localizedMessage)
                     }
                 }
         }
@@ -103,6 +115,15 @@ class AuthUtils(
         ).show()
     }
 
+    private fun showErrorToast(strMsg: String?) {
+        strMsg?.let {
+            Toast.makeText(
+                context,
+                it,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     companion object {
         const val REQUEST_CODE_FOR_SIGN_IN = 9001
