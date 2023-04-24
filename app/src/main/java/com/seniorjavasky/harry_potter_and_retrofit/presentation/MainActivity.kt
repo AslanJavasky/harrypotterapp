@@ -1,6 +1,8 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -8,6 +10,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.R
@@ -55,6 +60,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(
+        requestCode: Int, resultCode: Int, data: Intent?
+    ) {
+        if (requestCode == AuthUtils.REQUEST_CODE_FOR_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account=task.getResult(ApiException::class.java)
+                AuthUtils(this).signInWithGoogle(account.idToken)
+            }catch (e:ApiException){
+                Log.e("TAG", "onActivityResult: ", e)
+            }
+
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()

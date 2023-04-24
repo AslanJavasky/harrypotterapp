@@ -61,9 +61,13 @@ class SignDialogUtils(
             if (email.isNotEmpty()){
                 authUtils.resetPasswordForEmail(email)
             }
-
-
         }
+
+        binding.btnGoogle.setOnClickListener {
+            authUtils.btnGoogleClickListener()
+            alertDialog.dismiss()
+        }
+
     }
 
 

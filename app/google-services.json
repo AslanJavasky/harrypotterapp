@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "410857541010-5ddfvmhki825n6j2di309m4db2he9nq9.apps.googleusercontent.com",
+          "client_id": "410857541010-901p9ubd839g8dkhh5lo5v6endgmu6pq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seniorjavasky.harry_potter_and_retrofit",
+            "certificate_hash": "8d33ff9d4cf1910e0e480fef405f87902954f798"
+          }
+        },
+        {
+          "client_id": "410857541010-uad8794hfommm22kbiamq9oilsjvfvpf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
