@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Harry_potter_and_retrofit"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>
