@@ -4,13 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivitySignInBinding
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.auth.AuthUtils
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils.AuthUtils
 
 class SignInActivity : AppCompatActivity() {
 

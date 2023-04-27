@@ -43,7 +43,7 @@ class CharacterListViewModel(
                 getCharacterListUseCase.getCharacterList()
             }.fold(
                 onSuccess = { _characterList.value = it },
-                onFailure = {Log.e(TAG, "${it.message}", it)}
+                onFailure = { Log.e(TAG, "${it.message}", it) }
             )
             _isLoading.value = false
         }

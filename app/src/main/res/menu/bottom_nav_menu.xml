@@ -12,6 +12,9 @@
         android:icon="@drawable/icon_list"
         android:title="@string/title_character_list" />
 
-
+    <item
+        android:id="@+id/navigation_forum"
+        android:icon="@drawable/forum_icon"
+        android:title="@string/title_forum" />
 
 </menu>

@@ -1,10 +1,7 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation.auth
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils
 
-import android.content.Context
 import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.R
