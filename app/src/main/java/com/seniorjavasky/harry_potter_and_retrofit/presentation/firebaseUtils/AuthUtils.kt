@@ -31,6 +31,12 @@ class AuthUtils(
         authUI.signOut(mainActivity)
     }
 
+    fun getUserName(): String? {
+        val user = auth.currentUser
+        return if (user != null) {
+            user.displayName
+        } else ANONYMOUS
+    }
 
     companion object{
         fun getIntentForSignIN()=
@@ -44,6 +50,8 @@ class AuthUtils(
                 )
             )
             .build()
-    }
 
+
+        private const val ANONYMOUS="Anonymous"
+    }
 }

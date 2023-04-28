@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWithDrawerBinding
     private lateinit var navController: NavController
-    private lateinit var authUtils: AuthUtils
+    lateinit var authUtils: AuthUtils
     lateinit var databaseUtils: DatabaseUtils
 
 
