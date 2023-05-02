@@ -17,7 +17,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 private const val TAG = "MainViewModel555"
 
 class MainViewModel(
-    private val reposotory: CharacterRepositoryImpl,
     private val getCharacterListUseCase: GetCharacterListUseCase,
     private val getCharacterUseCase: GetCharacterUseCase
 ) : ViewModel() {
@@ -34,8 +33,8 @@ class MainViewModel(
         viewModelScope.launch {
             _state.value=ProgressState.Loading
             try {
-                _character.value = getCharacterUseCase.getCharacter()
-                _characterList.value = getCharacterListUseCase.getCharacterList()
+                _character.value = getCharacterUseCase()
+                _characterList.value = getCharacterListUseCase()
             } catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)
             }
@@ -49,7 +48,7 @@ class MainViewModel(
             _state.value=ProgressState.Loading
             try {
                 val listSize = _characterList.value.size
-                _character.value = getCharacterUseCase.getCharacter((1..listSize).random())
+                _character.value = getCharacterUseCase((1..listSize).random())
             }catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)
             }

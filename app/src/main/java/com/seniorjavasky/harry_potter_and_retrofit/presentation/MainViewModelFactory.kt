@@ -9,14 +9,13 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterUs
 class MainViewModelFactory : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)){
-            val repo=CharacterRepositoryImpl
-            val useCase=GetCharacterUseCase(repo)
-            val useCase2=GetCharacterListUseCase(repo)
-            return MainViewModel(repo,useCase2,useCase) as T
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            val repo = CharacterRepositoryImpl
+            val useCase1 = GetCharacterListUseCase(repo)
+            val useCase2 = GetCharacterUseCase(repo)
+            return MainViewModel(useCase1, useCase2) as T
         }
-        throw java.lang.IllegalArgumentException("Unknown class name")
+        throw RuntimeException("Unknown class name")
     }
 
 }

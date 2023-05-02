@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
@@ -17,8 +18,18 @@ import kotlinx.coroutines.launch
 
 class DbFragment : Fragment() {
 
+    val DbVMFactory= object:ViewModelProvider.Factory{
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DbViewModel::class.java)){
+                return DbViewModel(requireActivity().application) as T
+            }
+            throw RuntimeException("Unknown class name")
+        }
+    }
 
-    private val viewModel: DbViewModel by viewModels()
+    private val viewModel: DbViewModel by viewModels{
+        DbVMFactory
+    }
 
     private var _binding: FragmentDbBinding? = null
     private val binding get() = _binding!!
@@ -33,8 +44,6 @@ class DbFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.initDao(activity?.application)
 
         binding.btnAdd.setOnClickListener { viewModel.onBtnAdd() }
         binding.btnUpdate.setOnClickListener { viewModel.onUpdateBtn()}

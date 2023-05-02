@@ -1,9 +1,11 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.App
+import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.data.local.dao.CharacterDao
 import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDb
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,9 +13,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class DbViewModel : ViewModel() {
+class DbViewModel(
+    val context:Application
+) : ViewModel() {
 
-    private lateinit var characterDao: CharacterDao
+    private var characterDao=(context as App).db.characterDao()
 
     private var _characters = MutableStateFlow<List<CharacterDb>>(mutableListOf())
     val characters = _characters.asStateFlow()
@@ -24,6 +28,9 @@ class DbViewModel : ViewModel() {
 //        started = SharingStarted.WhileSubscribed(500L),
 //        initialValue = mutableListOf()
 //    )
+
+
+
 
     fun onBtnAdd() {
         var size = _characters.value.size
@@ -37,9 +44,6 @@ class DbViewModel : ViewModel() {
         }
     }
 
-    fun initDao(application: Application?) {
-        characterDao = (application as App).db.characterDao()
-    }
 
     fun onDeleteBtn() {
         viewModelScope.launch {

@@ -37,17 +37,14 @@ class CharacterListViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-
             kotlin.runCatching {
                 _isLoading.value = true
-                getCharacterListUseCase.getCharacterList()
+                getCharacterListUseCase()
             }.fold(
                 onSuccess = { _characterList.value = it },
                 onFailure = { Log.e(TAG, "${it.message}", it) }
             )
             _isLoading.value = false
         }
-
     }
-
 }

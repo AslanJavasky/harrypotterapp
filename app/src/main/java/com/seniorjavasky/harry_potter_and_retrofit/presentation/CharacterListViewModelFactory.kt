@@ -11,7 +11,7 @@ class CharacterListViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(CharacterListViewModel::class.java)){
             return CharacterListViewModel(GetCharacterListUseCase(CharacterRepositoryImpl)) as T
         }
-        throw java.lang.IllegalArgumentException("Unknown class name")
+        throw RuntimeException("Unknown class name")
     }
 
 }

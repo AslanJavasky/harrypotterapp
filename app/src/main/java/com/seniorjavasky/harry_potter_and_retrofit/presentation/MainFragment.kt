@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.*
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
@@ -23,16 +24,9 @@ class MainFragment : Fragment() {
         MainViewModelFactory()
     }
 
+
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
 
     override fun onCreateView(
@@ -49,7 +43,7 @@ class MainFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.character.collect {
-                with(binding){
+                with(binding) {
                     tvName.text = it.name
                     tvHouse.text = it.hogwartsHouse
                     imageCharacter.load(it.imageUrl)
@@ -63,17 +57,21 @@ class MainFragment : Fragment() {
         }
 
         binding.btnRandomCharacter.setOnClickListener {
-//            viewModel.randomCharacter()
+            viewModel.randomCharacter()
 
-            FirebaseCrashlytics.getInstance().log("This log method with extra info")
-            try {
-                throw Exception("My first exception")
-            }catch (e:Exception){
-                FirebaseCrashlytics.getInstance().recordException(e)
-            }
+//            FirebaseCrashlytics.getInstance().log("This log method with extra info")
+//            try {
+//                throw Exception("My first exception")
+//            } catch (e: Exception) {
+//                FirebaseCrashlytics.getInstance().recordException(e)
+//            }
         }
 
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
