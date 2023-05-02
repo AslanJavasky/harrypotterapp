@@ -22,7 +22,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     private var _state = MutableStateFlow<ProgressState>(ProgressState.Success)
-    var state=_state.asStateFlow()
+    var state = _state.asStateFlow()
 
     private var _character = MutableStateFlow<CharacterModel>(CharacterModel())
     var character = _character.asStateFlow()
@@ -31,28 +31,28 @@ class MainViewModel(
 
     init {
         viewModelScope.launch {
-            _state.value=ProgressState.Loading
+            _state.value = ProgressState.Loading
             try {
                 _character.value = getCharacterUseCase()
                 _characterList.value = getCharacterListUseCase()
             } catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)
             }
-            _state.value=ProgressState.Success
+            _state.value = ProgressState.Success
         }
     }
 
     fun randomCharacter() {
 //        _character.value = _characterList.value.random()
         viewModelScope.launch {
-            _state.value=ProgressState.Loading
+            _state.value = ProgressState.Loading
             try {
                 val listSize = _characterList.value.size
                 _character.value = getCharacterUseCase((1..listSize).random())
-            }catch (t: Throwable) {
+            } catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)
             }
-            _state.value=ProgressState.Success
+            _state.value = ProgressState.Success
         }
     }
 }

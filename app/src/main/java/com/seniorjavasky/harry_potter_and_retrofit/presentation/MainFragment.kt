@@ -33,7 +33,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,32 +40,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.character.collect {
-                with(binding) {
-                    tvName.text = it.name
-                    tvHouse.text = it.hogwartsHouse
-                    imageCharacter.load(it.imageUrl)
-                }
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.state.collect {
-                binding.progressBar.isVisible = it is ProgressState.Loading
-            }
-        }
-
-        binding.btnRandomCharacter.setOnClickListener {
-            viewModel.randomCharacter()
-
-//            FirebaseCrashlytics.getInstance().log("This log method with extra info")
-//            try {
-//                throw Exception("My first exception")
-//            } catch (e: Exception) {
-//                FirebaseCrashlytics.getInstance().recordException(e)
-//            }
-        }
-
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
     }
 
