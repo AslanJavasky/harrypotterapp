@@ -1,20 +1,16 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.CharacterItemBinding
-import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterModel
+import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterItem
 
 class CharacterListAdapter
-    : ListAdapter<CharacterModel, CharacterListViewHolder>(callback) {
+    : ListAdapter<CharacterItem, CharacterListViewHolder>(callback) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -39,12 +35,12 @@ class CharacterListAdapter
 
 class CharacterListViewHolder(val binding:CharacterItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-val callback = object : DiffUtil.ItemCallback<CharacterModel>() {
-    override fun areItemsTheSame(oldItem: CharacterModel, newItem: CharacterModel): Boolean {
+val callback = object : DiffUtil.ItemCallback<CharacterItem>() {
+    override fun areItemsTheSame(oldItem: CharacterItem, newItem: CharacterItem): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: CharacterModel, newItem: CharacterModel): Boolean {
+    override fun areContentsTheSame(oldItem: CharacterItem, newItem: CharacterItem): Boolean {
         return oldItem == newItem
     }
 

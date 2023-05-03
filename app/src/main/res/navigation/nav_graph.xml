@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_character">
+    app:startDestination="@id/navigation_room_db">
     <fragment
         android:id="@+id/navigation_character"
         android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.MainFragment"
@@ -19,4 +19,9 @@
         android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ForumFragment"
         android:label="ForumFragment"
         tools:layout="@layout/fragment_forum"/>
+    <fragment
+        android:id="@+id/navigation_room_db"
+        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.DbFragment"
+        android:label="RoomFragment"
+        tools:layout="@layout/fragment_db"/>
 </navigation>

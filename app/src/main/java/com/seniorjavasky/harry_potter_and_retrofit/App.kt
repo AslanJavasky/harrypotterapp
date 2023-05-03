@@ -21,15 +21,7 @@ class App : Application() {
 
         INSTANCE = this
 
-        db = Room
-            .databaseBuilder(
-                this,
-                CharacterDatabase::class.java,
-                "db"
-            )
-//            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-            .fallbackToDestructiveMigration()
-            .build()
+        db=CharacterDatabase.getInstance(this)
     }
 
     companion object {

@@ -1,6 +1,5 @@
 package com.seniorjavasky.harry_potter_and_retrofit.domain.usecase
 
-import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterModel
 import com.seniorjavasky.harry_potter_and_retrofit.domain.repository.CharacterRepository
 
 class GetCharacterListUseCase(

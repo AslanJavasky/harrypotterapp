@@ -1,15 +1,14 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.App
-import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.data.local.dao.CharacterDao
 import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDb
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -30,14 +29,11 @@ class DbViewModel(
 //    )
 
 
-
-
     fun onBtnAdd() {
-        var size = _characters.value.size
-        size++
+
         viewModelScope.launch {
             characterDao.insert(
-                CharacterDb(id = size, name = "Potter ${size}",
+                CharacterDb(id = 0, name = "Potter ${characters.value.size}",
                     "Slytherin","image.url.png")
             )
             updateTextView()
@@ -68,5 +64,6 @@ class DbViewModel(
             _characters.value = characterDao.getAll()
         }
     }
+
 
 }

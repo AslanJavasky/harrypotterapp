@@ -14,19 +14,8 @@ import kotlinx.coroutines.launch
 
 class DbFragment : Fragment() {
 
-    val dbVMFactory by lazy{
-        object:ViewModelProvider.Factory{
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(DbViewModel::class.java)){
-                    return DbViewModel(requireActivity().application) as T
-                }
-                throw RuntimeException("Unknown class name")
-            }
-        }
-    }
-
     private val viewModel: DbViewModel by viewModels{
-        dbVMFactory
+        DbViewModelFactory()
     }
 
     private var _binding: FragmentDbBinding? = null
@@ -50,9 +39,9 @@ class DbFragment : Fragment() {
 
 
         lifecycleScope.launch {
-//            viewModel.characters.collect {
-//                binding.textView.text = it.joinToString(separator = "\r\n")
-//            }
+            viewModel.characters.collect {
+                binding.textView.text = it.joinToString(separator = "\r\n")
+            }
         }
     }
 
