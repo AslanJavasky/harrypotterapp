@@ -1,21 +1,24 @@
 package com.seniorjavasky.harry_potter_and_retrofit.data.local.dao
 
 import androidx.room.*
-import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDb
+import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDbModel
 
 @Dao
 interface CharacterDao {
 
-    @Query("SELECT * FROM character")
-    suspend fun getAll(): List<CharacterDb>
+    @Query("SELECT * FROM characters")
+    suspend fun getAllCharacters(): List<CharacterDbModel>
+
+    @Query("SELECT * FROM characters WHERE id= :id LIMIT 1")
+    suspend fun getAllCharacterById(id:Int=1): CharacterDbModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(characterDb: CharacterDb)
+    suspend fun insertCharacterItem(character: CharacterDbModel)
 
-    @Update
-    suspend fun update(characterDb: CharacterDb)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCharacterList(characters: List<CharacterDbModel>)
 
-    @Delete
-    suspend fun delete(characterDb: CharacterDb)
+    @Query("DELETE FROM characters")
+    suspend fun deleteAll()
 
 }

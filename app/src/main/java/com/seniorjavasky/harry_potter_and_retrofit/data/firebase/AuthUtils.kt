@@ -1,5 +1,6 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils
+package com.seniorjavasky.harry_potter_and_retrofit.data.firebase
 
+import android.app.Application
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.ktx.auth
@@ -12,16 +13,17 @@ class AuthUtils(
     private val mainActivity: MainActivity
 ) {
 
-    private val signInActivity=SignInActivity()
-
     private val auth = Firebase.auth
     private val authUI=AuthUI.getInstance()
 
     private fun isDoneAuth(): Boolean = auth.currentUser != null
+    private val signInActivityClass=SignInActivity::class.java
+
+
 
     fun signUpIn() {
         if (!isDoneAuth()) {
-            val intent = Intent(mainActivity, SignInActivity::class.java)
+            val intent = Intent(mainActivity, signInActivityClass)
             mainActivity.startActivity(intent)
             mainActivity.finish()
         }

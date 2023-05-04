@@ -5,5 +5,6 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.repository.CharacterRe
 class GetCharacterListUseCase(
     private val repo: CharacterRepository
 ) {
-    suspend operator fun invoke() = repo.getCharacters()
+    suspend operator fun invoke() =
+        repo.getCharactersFromDb()
 }

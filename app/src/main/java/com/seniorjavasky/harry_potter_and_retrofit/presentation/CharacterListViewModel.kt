@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterItem
+import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.CashCharacterListUseCase
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterListUseCase
+import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterUseCase
+import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.UploadListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -12,6 +15,8 @@ import kotlinx.coroutines.launch
 private const val TAG = "CharacterListViewModel555"
 
 class CharacterListViewModel(
+    private val uploadCharacterListUseCase: UploadListUseCase,
+    private val cashCharacterListUseCase: CashCharacterListUseCase,
     private val getCharacterListUseCase: GetCharacterListUseCase
 ) : ViewModel() {
 
@@ -35,9 +40,14 @@ class CharacterListViewModel(
         )
 
     init {
+        getCharacters()
+    }
+
+    private fun getCharacters() {
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 _isLoading.value = true
+                cashCharacterListUseCase(uploadCharacterListUseCase())
                 getCharacterListUseCase()
             }.fold(
                 onSuccess = { _characterList.value = it },
@@ -46,4 +56,5 @@ class CharacterListViewModel(
             _isLoading.value = false
         }
     }
+
 }

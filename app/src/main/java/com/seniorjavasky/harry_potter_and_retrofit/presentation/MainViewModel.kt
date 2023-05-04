@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterItem
-import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterListUseCase
-import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterUseCase
+import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -13,7 +12,8 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainViewModel555"
 
 class MainViewModel(
-    private val getCharacterListUseCase: GetCharacterListUseCase,
+    private val uploadCharacterUseCase: UploadCharacterUseCase,
+    private val cashCharacterUseCase: CashCharacterUseCase,
     private val getCharacterUseCase: GetCharacterUseCase
 ) : ViewModel() {
 
@@ -22,15 +22,13 @@ class MainViewModel(
 
     private var _character = MutableStateFlow<CharacterItem>(CharacterItem())
     var character = _character.asStateFlow()
-    private var _characterList = MutableStateFlow<List<CharacterItem>>(mutableListOf())
-    var characterList = _characterList.asStateFlow()
 
     init {
         viewModelScope.launch {
             _state.value = ProgressState.Loading
             try {
+                cashCharacterUseCase(uploadCharacterUseCase())
                 _character.value = getCharacterUseCase()
-                _characterList.value = getCharacterListUseCase()
             } catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)
             }
@@ -39,15 +37,14 @@ class MainViewModel(
     }
 
     fun randomCharacter() {
-//        _character.value = _characterList.value.random()
         viewModelScope.launch {
-            _state.value = ProgressState.Loading
-            try {
-                val listSize = _characterList.value.size
-                _character.value = getCharacterUseCase((1..listSize).random())
-            } catch (t: Throwable) {
-                Log.e(TAG, "${t.message}: ", t)
-            }
+            kotlin.runCatching {
+                _state.value = ProgressState.Loading
+                getCharacterUseCase((1..23).random())
+            }.fold(
+                onSuccess = { _character.value = it },
+                onFailure = { Log.e(TAG, "${it.message}: ", it) }
+            )
             _state.value = ProgressState.Success
         }
     }

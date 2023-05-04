@@ -7,7 +7,7 @@ import android.widget.Toast
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivitySignInBinding
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils.AuthUtils
+import com.seniorjavasky.harry_potter_and_retrofit.data.firebase.AuthUtils
 
 class SignInActivity : AppCompatActivity() {
 

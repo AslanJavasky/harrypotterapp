@@ -7,6 +7,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ForumItemBinding
+import com.seniorjavasky.harry_potter_and_retrofit.domain.model.ForumItem
 
 class ForumAdapter(
     private val options: FirebaseRecyclerOptions<ForumItem>

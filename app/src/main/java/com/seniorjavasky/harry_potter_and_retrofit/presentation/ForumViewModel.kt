@@ -3,22 +3,24 @@ package com.seniorjavasky.harry_potter_and_retrofit.presentation
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.lifecycle.ViewModel
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils.DatabaseUtils
+import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.SendMessageUseCase
 
-class ForumViewModel : ViewModel() {
+class ForumViewModel(
+    private val sendMessageUseCase: SendMessageUseCase
+) : ViewModel() {
 
-    fun sendTextToFirebaseDb(text: String, databaseUtils: DatabaseUtils) {
-        databaseUtils.sendTextToDb(text)
+    fun getRecyclerAdapter(): ForumAdapter {
+        val options=App.INSTANCE.firebaseInstance.getFirebaseRecyclerOptions()
+        return ForumAdapter(options)
     }
 
-    fun retreiveDataFromDb(textView: TextView, databaseUtils: DatabaseUtils) {
-        databaseUtils.retreiveDataFromDb(textView)
+    fun sendTextToFirebaseDb(text: String) {
+        sendMessageUseCase(text)
     }
+
 
     inner class TextWatcherForEditText(
         private val imageButton: ImageButton
@@ -43,7 +45,4 @@ class ForumViewModel : ViewModel() {
 
 }
 
-data class ForumItem(
-    val text: String?="",
-    val user: String?=""
-)
+

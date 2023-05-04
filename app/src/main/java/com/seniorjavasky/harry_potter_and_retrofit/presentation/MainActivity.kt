@@ -1,37 +1,27 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils.AuthUtils
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils.DatabaseUtils
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWithDrawerBinding
     private lateinit var navController: NavController
-    lateinit var authUtils: AuthUtils
-    lateinit var databaseUtils: DatabaseUtils
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainWithDrawerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        authUtils = AuthUtils(this)
-        databaseUtils = DatabaseUtils(this)
+        initAuth()
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment_container) as NavHostFragment
@@ -43,18 +33,23 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
 
                 R.id.drawer_sign_up -> {
-                    authUtils.signUpIn()
+                    signUpIn()
                 }
                 R.id.drawer_sign_in -> {
-                    authUtils.signUpIn()
+                    signUpIn()
                 }
                 R.id.drawer_sign_out -> {
-                    authUtils.signOut()
+                    signOut()
                 }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
+
+    }
+
+    private fun initAuth() {
+        App.INSTANCE.firebaseInstance.initAuthUtils(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -62,5 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    private fun signUpIn(){
+        App.INSTANCE.firebaseInstance.authUtils.signUpIn()
+    }
+    private fun signOut(){
+        App.INSTANCE.firebaseInstance.authUtils.signOut()
+    }
 }

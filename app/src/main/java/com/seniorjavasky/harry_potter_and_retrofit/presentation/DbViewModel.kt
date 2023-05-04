@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.App
-import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDb
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
+import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDbModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -18,7 +15,7 @@ class DbViewModel(
 
     private var characterDao=(context as App).db.characterDao()
 
-    private var _characters = MutableStateFlow<List<CharacterDb>>(mutableListOf())
+    private var _characters = MutableStateFlow<List<CharacterDbModel>>(mutableListOf())
     val characters = _characters.asStateFlow()
 
 //    val characters=characterDao.getAll()
@@ -31,38 +28,38 @@ class DbViewModel(
 
     fun onBtnAdd() {
 
-        viewModelScope.launch {
-            characterDao.insert(
-                CharacterDb(id = 0, name = "Potter ${characters.value.size}",
-                    "Slytherin","image.url.png")
-            )
-            updateTextView()
-        }
+//        viewModelScope.launch {
+//            characterDao.insert(
+//                CharacterDbModel(id = 0, name = "Potter ${characters.value.size}",
+//                    "Slytherin","image.url.png")
+//            )
+//            updateTextView()
+//        }
     }
 
 
     fun onDeleteBtn() {
-        viewModelScope.launch {
-            characters.value.lastOrNull()?.let {
-                characterDao.delete(it)
-            }
-        }
-        updateTextView()
+//        viewModelScope.launch {
+//            characters.value.lastOrNull()?.let {
+//                characterDao.delete(it)
+//            }
+//        }
+//        updateTextView()
     }
 
     fun onUpdateBtn() {
-        viewModelScope.launch {
-            characters.value.lastOrNull()?.let {
-                characterDao.update(it.copy(name = "Albus"))
-            }
-        }
-        updateTextView()
+//        viewModelScope.launch {
+//            characters.value.lastOrNull()?.let {
+//                characterDao.update(it.copy(name = "Albus"))
+//            }
+//        }
+//        updateTextView()
     }
 
     private fun updateTextView() {
-        viewModelScope.launch {
-            _characters.value = characterDao.getAll()
-        }
+//        viewModelScope.launch {
+//            _characters.value = characterDao.getAll()
+//        }
     }
 
 

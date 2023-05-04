@@ -2,8 +2,8 @@ package com.seniorjavasky.harry_potter_and_retrofit.data.local.entity
 
 import androidx.room.*
 
-@Entity(tableName = "character")
-data class CharacterDb(
+@Entity(tableName = "characters")
+data class CharacterDbModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int,
@@ -14,3 +14,4 @@ data class CharacterDb(
     @ColumnInfo(name="image_url")
     val imageUrl:String
 )
+

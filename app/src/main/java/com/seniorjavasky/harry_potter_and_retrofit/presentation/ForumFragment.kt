@@ -1,31 +1,20 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentForumBinding
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.firebaseUtils.DatabaseUtils
 
 class ForumFragment : Fragment() {
 
 
-    private val viewModel: ForumViewModel by viewModels()
+    private val viewModel: ForumViewModel by viewModels{
+        ForumViewModelFactory()
+    }
 
     private var _binding: FragmentForumBinding? = null
     private val binding get() = _binding!!
@@ -46,10 +35,7 @@ class ForumFragment : Fragment() {
         binding.btnSend.setOnClickListener {
             val text = binding.editText.text.toString().trim()
             if (text.isNotEmpty()) {
-                viewModel.sendTextToFirebaseDb(
-                    text,
-                    getDbUtils()
-                )
+                viewModel.sendTextToFirebaseDb(text)
                 binding.editText.setText("")
             }
         }
@@ -64,7 +50,7 @@ class ForumFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        adapter = ForumAdapter(getDbUtils().getFirebaseRecyclerOptions())
+        adapter = viewModel.getRecyclerAdapter()
         val layoutManager = LinearLayoutManager(getMainActivity())
         layoutManager.stackFromEnd = true
         binding.rvData.layoutManager = layoutManager
@@ -91,6 +77,6 @@ class ForumFragment : Fragment() {
     }
 
     private fun getMainActivity() = (requireActivity() as MainActivity)
-    private fun getDbUtils() = getMainActivity().databaseUtils
+
 
 }
