@@ -1,7 +1,13 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainWithDrawerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        App.INSTANCE.permissionService.initMainActivityContext(this)
+        App.INSTANCE.permissionService.checkPermissions()
 
         initAuth()
 
@@ -45,22 +53,25 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
-
     }
 
-    private fun initAuth() {
-        App.INSTANCE.firebaseInstance.initAuthUtils(this)
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
 
     }
 
-    private fun signUpIn(){
+
+
+    private fun initAuth() {
+        App.INSTANCE.firebaseInstance.initAuthUtils(this)
+    }
+
+    private fun signUpIn() {
         App.INSTANCE.firebaseInstance.authUtils.signUpIn()
     }
-    private fun signOut(){
+
+    private fun signOut() {
         App.INSTANCE.firebaseInstance.authUtils.signOut()
     }
 }

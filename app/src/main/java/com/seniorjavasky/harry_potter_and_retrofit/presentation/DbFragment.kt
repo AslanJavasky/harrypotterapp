@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentDbBinding
 import kotlinx.coroutines.launch
+import okhttp3.internal.notify
 
 class DbFragment : Fragment() {
 
@@ -32,16 +33,8 @@ class DbFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAdd.setOnClickListener { viewModel.onBtnAdd() }
-        binding.btnUpdate.setOnClickListener { viewModel.onUpdateBtn()}
-        binding.btnDelete.setOnClickListener { viewModel.onDeleteBtn()}
-
-
-
-        lifecycleScope.launch {
-            viewModel.characters.collect {
-                binding.textView.text = it.joinToString(separator = "\r\n")
-            }
+        binding.btnNotify.setOnClickListener {
+            viewModel.testNotify()
         }
     }
 
