@@ -10,12 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentDbBinding
+import com.seniorjavasky.harry_potter_and_retrofit.lessons.MyService
 import kotlinx.coroutines.launch
 import okhttp3.internal.notify
 
 class DbFragment : Fragment() {
 
-    private val viewModel: DbViewModel by viewModels{
+    private val viewModel: DbViewModel by viewModels {
         DbViewModelFactory()
     }
 
@@ -33,8 +34,11 @@ class DbFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNotify.setOnClickListener {
-            viewModel.testNotify()
+        binding.btnService.setOnClickListener {
+            viewModel.startService()
+        }
+        binding.btnStop.setOnClickListener {
+            viewModel.stopService()
         }
     }
 

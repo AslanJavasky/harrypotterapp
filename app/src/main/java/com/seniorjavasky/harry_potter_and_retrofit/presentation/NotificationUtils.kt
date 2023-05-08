@@ -1,13 +1,10 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.seniorjavasky.harry_potter_and_retrofit.App
@@ -19,7 +16,7 @@ class NotificationUtils(
 
 
     fun createNotificationChannel() {
-        if (checkBuildVersionMoreThenOrEquealO()){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val name = "Our Notification Channel"
             val imporance = NotificationManager.IMPORTANCE_HIGH
             val descriptionText = "Some description text"
@@ -69,8 +66,7 @@ class NotificationUtils(
         )
     }
 
-    private fun checkBuildVersionMoreThenOrEquealO()=
-       Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+
 
     private fun getCorrectFlagForPendingIntent() =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

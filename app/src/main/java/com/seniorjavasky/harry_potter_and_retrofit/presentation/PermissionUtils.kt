@@ -66,7 +66,9 @@ class PermissionUtils(
 
 
         private var REQUEST_PERMISSIONS: Array<String> = buildList {
-            add(Manifest.permission.CAMERA)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                add(Manifest.permission.FOREGROUND_SERVICE)
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 add(Manifest.permission.POST_NOTIFICATIONS)
             }
