@@ -1,19 +1,9 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
 import android.app.Application
-import android.app.job.JobInfo
-import android.app.job.JobScheduler
-import android.content.ComponentName
-import android.content.Context
-import android.os.Build
-import androidx.core.app.JobIntentService
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import com.seniorjavasky.harry_potter_and_retrofit.App
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.HatIntentService
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.HatJobIntentService
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.MyJobService
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.SortingHatForegroundService
+import com.seniorjavasky.harry_potter_and_retrofit.lessons.HatWorker
 
 class DbViewModel(
     val context: Application
@@ -24,11 +14,11 @@ class DbViewModel(
     }
 
     fun startService() {
-        HatJobIntentService.enqueueWork(context)
+        HatWorker.start(20)
     }
 
     fun stopService() {
-        context.stopService(SortingHatForegroundService.getIntent(context))
+        HatWorker.stop()
     }
 
 
