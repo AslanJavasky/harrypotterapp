@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
+import com.seniorjavasky.harry_potter_and_retrofit.data.firebase.MessagingUtils
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +54,9 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
+
+        MessagingUtils().logToken()
+
     }
 
 

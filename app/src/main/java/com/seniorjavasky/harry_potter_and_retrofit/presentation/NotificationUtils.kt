@@ -5,10 +5,13 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
+import java.util.UUID
 
 class NotificationUtils(
     private val application: Application
@@ -16,7 +19,7 @@ class NotificationUtils(
 
 
     fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Our Notification Channel"
             val imporance = NotificationManager.IMPORTANCE_HIGH
             val descriptionText = "Some description text"
@@ -49,13 +52,60 @@ class NotificationUtils(
             .setAutoCancel(true)
             .build()
 
-        val isGrantedNotification= (application as App).permissionService.isPostNotificationsGranted()
-        if (isGrantedNotification !=null) {
-            if (isGrantedNotification){
+        val isGrantedNotification =
+            (application as App).permissionService.isPostNotificationsGranted()
+        if (isGrantedNotification != null) {
+            if (isGrantedNotification) {
                 showNotification(notification)
             }
-        } else{
+        } else {
             showNotification(notification)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun showNewNotification(
+        channelId: String = "new channel id",
+        @DrawableRes notificationIcon: Int = R.drawable.small_icon_for_notification,
+        notificationTitle: String = "Notification title",
+        notificationContentText: String = "notification content text",
+        notificationPriority: Int = NotificationCompat.PRIORITY_DEFAULT,
+        channelName: String = "New channel name",
+        channelImportance: Int = NotificationManager.IMPORTANCE_DEFAULT,
+        channelDescription: String = "Some channel description",
+        autoCancel: Boolean = true
+
+    ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, channelName, channelImportance).apply {
+                description = channelDescription
+            }
+
+            val notificationManager =
+                application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val notification = NotificationCompat.Builder(application, channelId)
+            .setSmallIcon(notificationIcon)
+            .setContentTitle(notificationTitle)
+            .setContentText(notificationContentText)
+            .setPriority(notificationPriority)
+            .setAutoCancel(autoCancel)
+            .build()
+
+        val isGrantedNotification =
+            (application as App).permissionService.isPostNotificationsGranted()
+        if (isGrantedNotification != null) {
+            if (isGrantedNotification) {
+                NotificationManagerCompat.from(application).notify(
+                    NOTIFICATION_ID, notification
+                )
+            }else{
+                Toast.makeText(application, "Permission not granted!", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(application, "Permission not granted!", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -65,7 +115,6 @@ class NotificationUtils(
             NOTIFICATION_ID, notification
         )
     }
-
 
 
     private fun getCorrectFlagForPendingIntent() =
@@ -79,8 +128,8 @@ class NotificationUtils(
     companion object {
         private const val CHANNEL_ID = "channel_id"
         private const val NOTIFICATION_ID = 555
-        private var INSTANCE:NotificationUtils?=null
-        private var LOCK=Any()
+        private var INSTANCE: NotificationUtils? = null
+        private var LOCK = Any()
 
         fun getInstance(application: Application): NotificationUtils {
             INSTANCE?.let {

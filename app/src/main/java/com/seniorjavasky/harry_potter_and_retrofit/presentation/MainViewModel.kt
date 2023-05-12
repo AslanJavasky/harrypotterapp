@@ -12,8 +12,6 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainViewModel555"
 
 class MainViewModel(
-    private val uploadCharacterUseCase: UploadCharacterUseCase,
-    private val cashCharacterUseCase: CashCharacterUseCase,
     private val getCharacterUseCase: GetCharacterUseCase
 ) : ViewModel() {
 
@@ -27,7 +25,6 @@ class MainViewModel(
         viewModelScope.launch {
             _state.value = ProgressState.Loading
             try {
-                cashCharacterUseCase(uploadCharacterUseCase())
                 _character.value = getCharacterUseCase()
             } catch (t: Throwable) {
                 Log.e(TAG, "${t.message}: ", t)

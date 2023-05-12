@@ -1,33 +1,27 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
-import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentDbBinding
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.MyService
-import kotlinx.coroutines.launch
-import okhttp3.internal.notify
+import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentWorkmanagerBinding
 
-class DbFragment : Fragment() {
+class WorkmanagerFragment : Fragment() {
 
-    private val viewModel: DbViewModel by viewModels {
-        DbViewModelFactory()
+    private val viewModel: WorkmanagerViewModel by viewModels {
+        WorkmanagerViewModelFactory()
     }
 
-    private var _binding: FragmentDbBinding? = null
+    private var _binding: FragmentWorkmanagerBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDbBinding.inflate(inflater, container, false)
+        _binding = FragmentWorkmanagerBinding.inflate(inflater, container, false)
         return binding.root
     }
 

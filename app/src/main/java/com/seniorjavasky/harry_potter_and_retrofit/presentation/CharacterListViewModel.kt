@@ -15,8 +15,6 @@ import kotlinx.coroutines.launch
 private const val TAG = "CharacterListViewModel555"
 
 class CharacterListViewModel(
-    private val uploadCharacterListUseCase: UploadListUseCase,
-    private val cashCharacterListUseCase: CashCharacterListUseCase,
     private val getCharacterListUseCase: GetCharacterListUseCase
 ) : ViewModel() {
 
@@ -47,7 +45,6 @@ class CharacterListViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 _isLoading.value = true
-                cashCharacterListUseCase(uploadCharacterListUseCase())
                 getCharacterListUseCase()
             }.fold(
                 onSuccess = { _characterList.value = it },

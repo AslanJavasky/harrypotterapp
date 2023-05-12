@@ -22,5 +22,7 @@
     <string name="msg_link_account">Email successfully linked to Google account</string>
     <string name="title_forum">Forum</string>
     <string name="title_room">Room</string>
+    <string name="title_workmanager">WorkManager</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 </resources>

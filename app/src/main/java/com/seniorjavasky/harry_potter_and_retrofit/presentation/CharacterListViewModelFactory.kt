@@ -11,14 +11,12 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.UploadListUseC
 class CharacterListViewModelFactory : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CharacterListViewModel::class.java)){
-            val repo=CharacterRepositoryImpl(App.INSTANCE)
-            val uploadListUseCase=UploadListUseCase(repo)
-            val cashCharacterListUseCase=CashCharacterListUseCase(repo)
-            val getCharacterListUseCase=GetCharacterListUseCase(repo)
+        if (modelClass.isAssignableFrom(CharacterListViewModel::class.java)) {
+            val repo = CharacterRepositoryImpl(App.INSTANCE)
+            val uploadListUseCase = UploadListUseCase(repo)
+            val cashCharacterListUseCase = CashCharacterListUseCase(repo)
+            val getCharacterListUseCase = GetCharacterListUseCase(repo)
             return CharacterListViewModel(
-                uploadListUseCase,
-                cashCharacterListUseCase,
                 getCharacterListUseCase
             ) as T
         }

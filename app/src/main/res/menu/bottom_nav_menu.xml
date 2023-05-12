@@ -18,7 +18,7 @@
         android:title="@string/title_forum" />
 
     <item
-        android:id="@+id/navigation_room_db"
-        android:icon="@drawable/room_icon"
-        android:title="@string/title_room" />
+        android:id="@+id/navigation_service"
+        android:icon="@drawable/sorting_hat_icon"
+        android:title="@string/title_workmanager" />
 </menu>

@@ -14,10 +14,8 @@ class MainViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             val repo = CharacterRepositoryImpl(App.INSTANCE)
-            val uploadCharacterUseCase=UploadCharacterUseCase(repo)
-            val cashCharacterUseCase=CashCharacterUseCase(repo)
             val getCharacterUseCase= GetCharacterUseCase(repo)
-            return MainViewModel(uploadCharacterUseCase, cashCharacterUseCase,getCharacterUseCase) as T
+            return MainViewModel(getCharacterUseCase) as T
         }
         throw RuntimeException("Unknown class name")
     }
