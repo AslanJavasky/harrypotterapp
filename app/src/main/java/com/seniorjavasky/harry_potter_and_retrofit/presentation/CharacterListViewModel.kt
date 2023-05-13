@@ -54,4 +54,8 @@ class CharacterListViewModel(
         }
     }
 
+    fun refresh() {
+        getCharacters()
+    }
+
 }
