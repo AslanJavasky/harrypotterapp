@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentForum
 
 import android.text.Editable
 import android.text.TextWatcher

@@ -1,9 +1,8 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentWorkmanager
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import com.seniorjavasky.harry_potter_and_retrofit.App
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.HatWorker
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.worker.CasherDataWorker
 
 class WorkmanagerViewModel(

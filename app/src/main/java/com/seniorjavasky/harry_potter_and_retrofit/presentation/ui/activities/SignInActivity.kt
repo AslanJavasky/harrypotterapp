@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

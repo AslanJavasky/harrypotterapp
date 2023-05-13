@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentForum
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

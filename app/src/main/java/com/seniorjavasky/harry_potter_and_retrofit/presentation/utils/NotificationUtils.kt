@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.utils
 
 import android.annotation.SuppressLint
 import android.app.*
@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import java.util.UUID
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.MainActivity
 
 class NotificationUtils(
     private val application: Application

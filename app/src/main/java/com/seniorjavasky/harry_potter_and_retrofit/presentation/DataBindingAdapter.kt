@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacter.ProgressState
 
 @BindingAdapter("characterNameOfHarryPotter")
 fun bindCharacterNameOfHarryPotter(textView: TextView, strName: String) {

@@ -43,9 +43,9 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
@@ -55,7 +55,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     //Fragment
-    implementation 'androidx.fragment:fragment-ktx:1.5.6'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
@@ -93,6 +93,10 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.2'
     //WorkManager
     implementation 'androidx.work:work-runtime-ktx:2.8.1'
+    //SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    //Paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
 
     testImplementation 'junit:junit:4.13.2'

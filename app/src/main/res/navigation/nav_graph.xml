@@ -3,25 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_service">
+    app:startDestination="@id/navigation_paging_example">
     <fragment
         android:id="@+id/navigation_character"
-        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.MainFragment"
+        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacter.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/navigation_character_list"
-        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.CharacterListFragment"
+        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacterList.CharacterListFragment"
         android:label="fragment_character_list"
         tools:layout="@layout/fragment_character_list" />
     <fragment
         android:id="@+id/navigation_forum"
-        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ForumFragment"
+        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentForum.ForumFragment"
         android:label="ForumFragment"
         tools:layout="@layout/fragment_forum"/>
     <fragment
         android:id="@+id/navigation_service"
-        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.WorkmanagerFragment"
+        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentWorkmanager.WorkmanagerFragment"
         android:label="ServiceFragment"
         tools:layout="@layout/fragment_workmanager"/>
+    <fragment
+        android:id="@+id/navigation_paging_example"
+        android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentPaging.PagingFragment"
+        android:label="PagingFragment"
+        tools:layout="@layout/fragment_paging"/>
 </navigation>

@@ -11,7 +11,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.NotificationUtils
 import kotlinx.coroutines.*
 
 private const val TAG = "SortingHatForegroundService"

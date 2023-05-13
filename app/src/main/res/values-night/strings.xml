@@ -24,4 +24,5 @@
     <string name="title_room">Room</string>
     <string name="title_workmanager">WorkManager</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="title_paging">Paging</string>
 </resources>

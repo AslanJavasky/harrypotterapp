@@ -1,18 +1,15 @@
-package com.seniorjavasky.harry_potter_and_retrofit.presentation
+package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacterList
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterItem
-import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.CashCharacterListUseCase
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterListUseCase
-import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterUseCase
-import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.UploadListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-private const val TAG = "CharacterListViewModel555"
+private const val TAG = "CharacterListViewModel"
 
 class CharacterListViewModel(
     private val getCharacterListUseCase: GetCharacterListUseCase
@@ -43,8 +40,8 @@ class CharacterListViewModel(
 
     private fun getCharacters() {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.value = true
             kotlin.runCatching {
-                _isLoading.value = true
                 getCharacterListUseCase()
             }.fold(
                 onSuccess = { _characterList.value = it },
@@ -52,6 +49,10 @@ class CharacterListViewModel(
             )
             _isLoading.value = false
         }
+    }
+
+    fun refresh() {
+        getCharacters()
     }
 
 }

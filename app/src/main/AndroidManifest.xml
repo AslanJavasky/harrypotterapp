@@ -17,10 +17,10 @@
         android:theme="@style/Theme.Harry_potter_and_retrofit"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.SignInActivity"
+            android:name=".presentation.ui.activities.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

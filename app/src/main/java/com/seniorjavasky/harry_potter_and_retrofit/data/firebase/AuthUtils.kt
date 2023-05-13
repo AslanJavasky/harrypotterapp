@@ -1,13 +1,12 @@
 package com.seniorjavasky.harry_potter_and_retrofit.data.firebase
 
-import android.app.Application
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.MainActivity
-import com.seniorjavasky.harry_potter_and_retrofit.presentation.SignInActivity
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.MainActivity
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.SignInActivity
 
 class AuthUtils(
     private val mainActivity: MainActivity
@@ -17,7 +16,7 @@ class AuthUtils(
     private val authUI=AuthUI.getInstance()
 
     private fun isDoneAuth(): Boolean = auth.currentUser != null
-    private val signInActivityClass=SignInActivity::class.java
+    private val signInActivityClass= SignInActivity::class.java
 
 
 

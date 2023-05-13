@@ -21,4 +21,9 @@
         android:id="@+id/navigation_service"
         android:icon="@drawable/sorting_hat_icon"
         android:title="@string/title_workmanager" />
+
+    <item
+        android:id="@+id/navigation_paging_example"
+        android:icon="@drawable/paging_icon"
+        android:title="@string/title_paging" />
 </menu>
