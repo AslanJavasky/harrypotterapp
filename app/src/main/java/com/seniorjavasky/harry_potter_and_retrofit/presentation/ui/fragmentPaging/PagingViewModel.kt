@@ -6,18 +6,16 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.seniorjavasky.harry_potter_and_retrofit.data.paging.repoImpl.CharacterPagingRepository
+import com.seniorjavasky.harry_potter_and_retrofit.data.paging.repoImpl.CharacterPagingRepositoryImpl
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterPagingItem
+import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetPagerForCharactersUseCase
 import kotlinx.coroutines.flow.Flow
 
 class PagingViewModel : ViewModel() {
 
-    val repo = CharacterPagingRepository()
+    val useCase=GetPagerForCharactersUseCase(CharacterPagingRepositoryImpl())
 
-    val items: Flow<PagingData<CharacterPagingItem>> = Pager(
-        config = PagingConfig(ITEMS_PER_PAGE, enablePlaceholders = false),
-        pagingSourceFactory = { repo.characterPagingSource() }
-    )
+    val items: Flow<PagingData<CharacterPagingItem>> = useCase()
         .flow
         .cachedIn(viewModelScope)
 
