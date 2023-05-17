@@ -2,15 +2,17 @@ package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentPagi
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.CharacterItemBinding
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterPagingItem
 
 class CharacterPagingListAdapter
-    : ListAdapter<CharacterPagingItem,
+    : PagingDataAdapter<CharacterPagingItem,
         CharacterPagingListAdapter.CharacterListViewHolder>(callback) {
 
 
@@ -28,13 +30,20 @@ class CharacterPagingListAdapter
         holder: CharacterListViewHolder, position: Int
     ) {
         val characterItem = getItem(position)
-        holder.binding.imageCharacter.load(characterItem.imageUrl)
-        holder.binding.tvName.text = characterItem.name
-        holder.binding.tvHouse.text = characterItem.hogwartsHouse
-
+        characterItem?.let { holder.bind(it) }
     }
     inner class CharacterListViewHolder(
-        val binding:CharacterItemBinding) : RecyclerView.ViewHolder(binding.root)
+        val binding:CharacterItemBinding) : RecyclerView.ViewHolder(binding.root){
+            fun bind(characterPagingItem: CharacterPagingItem){
+                if(characterPagingItem.imageUrl != null){
+                    binding.imageCharacter.load(characterPagingItem.imageUrl)
+                }else{
+                    binding.imageCharacter.load(R.drawable.empty_face)
+                }
+                binding.tvName.text = characterPagingItem.name ?: "N/D"
+                binding.tvHouse.text = characterPagingItem.hogwartsHouse ?: "N/D"
+            }
+        }
 
     companion object {
         val callback = object : DiffUtil.ItemCallback<CharacterPagingItem>() {

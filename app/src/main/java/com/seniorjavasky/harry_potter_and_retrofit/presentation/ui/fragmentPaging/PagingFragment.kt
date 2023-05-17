@@ -6,12 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentPagingBinding
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class PagingFragment : Fragment() {
@@ -39,8 +44,21 @@ class PagingFragment : Fragment() {
         binding.rvPagingCharacters.adapter=rvAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.characters.collect{
-                rvAdapter.submitList(it)
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.items.collectLatest{
+                    rvAdapter.submitData(it)
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                rvAdapter.loadStateFlow.collect{
+                    binding.appendProgress.isVisible=
+                        it.source.append is LoadState.Loading
+                    binding.prependProgress.isVisible=
+                        it.source.prepend is LoadState.Loading
+
+                }
             }
         }
 
