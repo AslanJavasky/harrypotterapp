@@ -1,11 +1,7 @@
-package com.seniorjavasky.harry_potter_and_retrofit.lessons
+package com.seniorjavasky.harry_potter_and_retrofit.lessons.foreground
 
-import android.app.job.JobInfo
 import android.app.job.JobParameters
-import android.app.job.JobScheduler
 import android.app.job.JobService
-import android.content.ComponentName
-import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.*
 
@@ -51,7 +47,7 @@ class MyJobService : JobService() {
 
     companion object{
         const val JOB_ID=777
-        fun getJobService()=MyJobService::class.java
+        fun getJobService()= MyJobService::class.java
     }
 }
 

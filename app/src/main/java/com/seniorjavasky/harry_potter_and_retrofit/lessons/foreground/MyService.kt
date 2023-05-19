@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.lessons
+package com.seniorjavasky.harry_potter_and_retrofit.lessons.foreground
 
 import android.app.Service
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.lessons
+package com.seniorjavasky.harry_potter_and_retrofit.lessons.foreground
 
 import android.app.Application
 import android.content.Context
@@ -39,7 +39,7 @@ class HatJobIntentService: JobIntentService() {
 
         const val JOB_ID=777
 
-        fun getWorkIntent(context: Context)=Intent(context,HatJobIntentService::class.java)
+        fun getWorkIntent(context: Context)=Intent(context, HatJobIntentService::class.java)
         fun enqueueWork(context: Application) {
             enqueueWork(
                 context,

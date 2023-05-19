@@ -1,10 +1,9 @@
-package com.seniorjavasky.harry_potter_and_retrofit.lessons
+package com.seniorjavasky.harry_potter_and_retrofit.lessons.foreground
 
 import android.content.Context
 import android.util.Log
 import androidx.work.*
 import com.seniorjavasky.harry_potter_and_retrofit.App
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
