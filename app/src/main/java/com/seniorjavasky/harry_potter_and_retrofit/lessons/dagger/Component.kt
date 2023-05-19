@@ -21,7 +21,7 @@ class Component {
     }
 
     fun inject(mainActivity: MainActivity) {
-        mainActivity.tripToHogwarts = getTripToHogwarts()
+//        mainActivity.tripToHogwarts = getTripToHogwarts()
     }
 
 }

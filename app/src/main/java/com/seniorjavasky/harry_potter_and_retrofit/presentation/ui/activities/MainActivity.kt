@@ -1,5 +1,6 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -9,32 +10,22 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.data.firebase.MessagingUtils
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
-import com.seniorjavasky.harry_potter_and_retrofit.lessons.dagger.*
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWithDrawerBinding
     private lateinit var navController: NavController
 
-    @Inject
-    lateinit var tripToHogwarts: TripToHogwarts
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainWithDrawerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        DaggerComponent2.create().inject(this)
-
-        tripToHogwarts.toString()
-
         App.INSTANCE.permissionService.initMainActivityContext(this)
         App.INSTANCE.permissionService.checkPermissions()
 
-        initAuth()
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment_container) as NavHostFragment
@@ -59,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             return@setNavigationItemSelectedListener true
         }
 
-        MessagingUtils().logToken()
+//        MessagingUtils().logToken()
 
     }
 
@@ -70,15 +61,20 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun initAuth() {
-        App.INSTANCE.firebaseInstance.initAuthUtils(this)
-    }
+    private fun isDoneAuth(): Boolean =
+        App.INSTANCE.firebaseInstance.authUtils.auth.currentUser != null
 
     private fun signUpIn() {
-        App.INSTANCE.firebaseInstance.authUtils.signUpIn()
+        if (!isDoneAuth()) {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun signOut() {
-        App.INSTANCE.firebaseInstance.authUtils.signOut()
+        App.INSTANCE.firebaseInstance.authUtils.authUI
+            .signOut(this)
+
     }
 }

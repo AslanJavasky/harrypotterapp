@@ -8,10 +8,11 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterLi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TAG = "CharacterListViewModel"
 
-class CharacterListViewModel(
+class CharacterListViewModel @Inject constructor(
     private val getCharacterListUseCase: GetCharacterListUseCase
 ) : ViewModel() {
 
@@ -39,16 +40,17 @@ class CharacterListViewModel(
     }
 
     private fun getCharacters() {
+        _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            _isLoading.value = true
             kotlin.runCatching {
                 getCharacterListUseCase()
             }.fold(
                 onSuccess = { _characterList.value = it },
                 onFailure = { Log.e(TAG, "${it.message}", it) }
             )
-            _isLoading.value = false
+
         }
+        _isLoading.value = false
     }
 
     fun refresh() {

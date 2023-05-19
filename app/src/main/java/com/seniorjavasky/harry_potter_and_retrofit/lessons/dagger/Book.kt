@@ -2,6 +2,6 @@ package com.seniorjavasky.harry_potter_and_retrofit.lessons.dagger
 
 import javax.inject.Inject
 
-class Book @Inject constructor(){
+class Book {
 
 }

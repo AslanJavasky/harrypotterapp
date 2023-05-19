@@ -105,7 +105,9 @@ class NotificationUtils(
                 Toast.makeText(application, "Permission not granted!", Toast.LENGTH_LONG).show()
             }
         } else {
-            Toast.makeText(application, "Permission not granted!", Toast.LENGTH_LONG).show()
+               NotificationManagerCompat.from(application).notify(
+                    NOTIFICATION_ID, notification
+                )
         }
     }
 

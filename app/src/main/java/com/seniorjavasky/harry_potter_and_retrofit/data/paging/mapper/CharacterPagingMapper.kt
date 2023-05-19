@@ -3,8 +3,9 @@ package com.seniorjavasky.harry_potter_and_retrofit.data.paging.mapper
 
 import com.seniorjavasky.harry_potter_and_retrofit.data.paging.dto.DataJson
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterPagingItem
+import javax.inject.Inject
 
-class CharacterPagingMapper {
+class CharacterPagingMapper @Inject constructor() {
 
     fun mapDtoPagingToItemPaging(dtoList: List<DataJson>) =
         dtoList.map {

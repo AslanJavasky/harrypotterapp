@@ -8,17 +8,14 @@ import com.seniorjavasky.harry_potter_and_retrofit.data.paging.repoImpl.Characte
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterPagingItem
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetPagerForCharactersUseCase
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class PagingViewModel : ViewModel() {
-
-    val useCase=GetPagerForCharactersUseCase(CharacterPagingRepositoryImpl())
+class PagingViewModel @Inject constructor(
+    private val useCase: GetPagerForCharactersUseCase
+) : ViewModel() {
 
     val items: Flow<PagingData<CharacterPagingItem>> = useCase()
         .flow
         .cachedIn(viewModelScope)
 
-
-    companion object {
-        private const val ITEMS_PER_PAGE = 100
-    }
 }

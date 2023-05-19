@@ -7,20 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentForumBinding
+import com.seniorjavasky.harry_potter_and_retrofit.di.ContextModule
+import com.seniorjavasky.harry_potter_and_retrofit.di.DaggerApplicationComponent
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.MainActivity
+import javax.inject.Inject
 
 class ForumFragment : Fragment() {
 
+    @Inject
+    lateinit var VMFactory:ForumViewModelFactory
 
-    private val viewModel: ForumViewModel by viewModels{
-        ForumViewModelFactory()
+    private val viewModel: ForumViewModel by viewModels {
+        VMFactory
     }
 
     private var _binding: FragmentForumBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: ForumAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.INSTANCE.appComponent.injectForumFragment(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

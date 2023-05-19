@@ -4,14 +4,17 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.seniorjavasky.harry_potter_and_retrofit.data.paging.pagingSource.CharacterPagingSource
 import com.seniorjavasky.harry_potter_and_retrofit.domain.repository.CharacterPagingRepository
+import javax.inject.Inject
 
 
-class CharacterPagingRepositoryImpl : CharacterPagingRepository {
+class CharacterPagingRepositoryImpl @Inject constructor(
+    private val pagingSource: CharacterPagingSource
+) : CharacterPagingRepository {
 
 
     override fun getPager() = Pager(
         config = PagingConfig(ITEMS_PER_PAGE, enablePlaceholders = false),
-        pagingSourceFactory = { CharacterPagingSource() }
+        pagingSourceFactory = { pagingSource }
     )
 
     companion object {

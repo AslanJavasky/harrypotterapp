@@ -2,35 +2,20 @@ package com.seniorjavasky.harry_potter_and_retrofit.data.firebase
 
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.MainActivity
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.SignInActivity
+import javax.inject.Inject
 
 class AuthUtils(
-    private val mainActivity: MainActivity
+
+    internal val auth: FirebaseAuth,
+    internal val authUI: AuthUI
 ) {
 
-    private val auth = Firebase.auth
-    private val authUI=AuthUI.getInstance()
-
-    private fun isDoneAuth(): Boolean = auth.currentUser != null
-    private val signInActivityClass= SignInActivity::class.java
-
-
-
-    fun signUpIn() {
-        if (!isDoneAuth()) {
-            val intent = Intent(mainActivity, signInActivityClass)
-            mainActivity.startActivity(intent)
-            mainActivity.finish()
-        }
-    }
-
-    fun signOut(){
-        authUI.signOut(mainActivity)
-    }
 
     fun getUserName(): String? {
         val user = auth.currentUser
@@ -39,20 +24,20 @@ class AuthUtils(
         } else ANONYMOUS
     }
 
-    companion object{
-        fun getIntentForSignIN()=
+    companion object {
+        fun getIntentForSignIN() =
             AuthUI.getInstance().createSignInIntentBuilder()
-            .setLogo(R.drawable.harry_potter_30)
-            .setAvailableProviders(
-                listOf(
-                    AuthUI.IdpConfig.GoogleBuilder().build(),
-                    AuthUI.IdpConfig.EmailBuilder().build(),
-                    AuthUI.IdpConfig.PhoneBuilder().build()
+                .setLogo(R.drawable.harry_potter_30)
+                .setAvailableProviders(
+                    listOf(
+                        AuthUI.IdpConfig.GoogleBuilder().build(),
+                        AuthUI.IdpConfig.EmailBuilder().build(),
+                        AuthUI.IdpConfig.PhoneBuilder().build()
+                    )
                 )
-            )
-            .build()
+                .build()
 
 
-        private const val ANONYMOUS="Anonymous"
+        private const val ANONYMOUS = "Anonymous"
     }
 }

@@ -5,13 +5,13 @@ import androidx.paging.PagingState
 import com.seniorjavasky.harry_potter_and_retrofit.data.paging.api.RetrofitInstance
 import com.seniorjavasky.harry_potter_and_retrofit.data.paging.mapper.CharacterPagingMapper
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterPagingItem
+import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
-class CharacterPagingSource : PagingSource<Int, CharacterPagingItem>() {
-
-    private val api = RetrofitInstance
-    private val mapper = CharacterPagingMapper()
+class CharacterPagingSource @Inject constructor(
+    private val mapper : CharacterPagingMapper
+) : PagingSource<Int, CharacterPagingItem>() {
 
     override suspend fun load(
         params: LoadParams<Int>
@@ -23,7 +23,7 @@ class CharacterPagingSource : PagingSource<Int, CharacterPagingItem>() {
 
         return kotlin.runCatching {
             mapper.mapDtoPagingToItemPaging(
-                api.searchCharactersApi.getCharacters(page).data
+                RetrofitInstance.searchCharactersApi.getCharacters(page).data
             )
         }.fold(
             onSuccess = {

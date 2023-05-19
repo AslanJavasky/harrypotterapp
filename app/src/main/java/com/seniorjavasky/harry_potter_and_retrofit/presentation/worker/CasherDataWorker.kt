@@ -3,43 +3,65 @@ package com.seniorjavasky.harry_potter_and_retrofit.presentation.worker
 import android.content.Context
 import androidx.work.*
 import com.seniorjavasky.harry_potter_and_retrofit.App
+import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.data.CharacterRepositoryImpl
+import com.seniorjavasky.harry_potter_and_retrofit.data.local.database.CharacterDatabase
+import com.seniorjavasky.harry_potter_and_retrofit.data.mappers.CharacterMapper
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.CashCharacterListUseCase
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.UploadListUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class CasherDataWorker(
     context: Context,
-    params: WorkerParameters
+    params: WorkerParameters,
+    private val uploadDataUseCase: UploadListUseCase,
+    private val cashDataUseCase: CashCharacterListUseCase
 ) : CoroutineWorker(context, params) {
 
-    val repo = CharacterRepositoryImpl(App.INSTANCE)
-    val uploadDataUseCase = UploadListUseCase(repo)
-    val cashDataUseCase = CashCharacterListUseCase(repo)
-
-
     override suspend fun doWork(): Result {
+        makeNotification("Start")
+        (0..100 step 10).forEach {
+            delay(300)
+            setProgress(workDataOf(PROGRESS to it))
+        }
+
         return withContext(Dispatchers.IO) {
 
             return@withContext try {
                 cashDataUseCase(
                     uploadDataUseCase()
                 )
+                makeNotification("Finish")
                 Result.success()
+
             } catch (throwable: Throwable) {
                 throwable.printStackTrace()
+                makeNotification("Error")
                 Result.failure()
             }
+
         }
+    }
+
+    private fun makeNotification(notContent: String) {
+        App.INSTANCE.notificationService.showNewNotification(
+            notificationIcon = R.drawable.sorting_hat_icon,
+            notificationContentText = notContent,
+            notificationTitle = "Cashing"
+        )
     }
 
     companion object {
 
         private val workManager = WorkManager.getInstance(App.INSTANCE)
 
+        fun getWorkManager() = workManager
+
         private fun getRequest() =
             OneTimeWorkRequestBuilder<CasherDataWorker>()
+                .addTag(TAG_PROGRESS)
                 .build()
 
 
@@ -50,10 +72,13 @@ class CasherDataWorker(
                 getRequest()
             )
                 .enqueue()
+
         }
 
         fun stop() = workManager.cancelUniqueWork(WORK_NAME)
 
         private const val WORK_NAME = "cashing data into room db work"
+        const val PROGRESS = "progress"
+        const val TAG_PROGRESS = "=tag_progress"
     }
 }

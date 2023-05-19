@@ -1,23 +1,35 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacterList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentCharacterListBinding
+import com.seniorjavasky.harry_potter_and_retrofit.di.ContextModule
+import com.seniorjavasky.harry_potter_and_retrofit.di.DaggerApplicationComponent
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class CharacterListFragment : Fragment() {
 
-    private val viewModel: CharacterListViewModel by viewModels {
-        CharacterListViewModelFactory()
+    @Inject
+    lateinit var VMFactory:CharacterListViewModelFactory
+
+    private val viewModel: CharacterListViewModel by viewModels{
+        VMFactory
     }
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.INSTANCE.appComponent.injectCharacterListFragment(this)
+        super.onCreate(savedInstanceState)
+    }
 
 
     override fun onCreateView(

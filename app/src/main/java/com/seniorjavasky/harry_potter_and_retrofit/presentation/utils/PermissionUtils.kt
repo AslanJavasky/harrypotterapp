@@ -21,7 +21,7 @@ class PermissionUtils(
 
     fun checkPermissions() {
         val isAllGranted = REQUEST_PERMISSIONS.all {
-            ContextCompat.checkSelfPermission(
+            ActivityCompat.checkSelfPermission(
                 mainActivity,
                 it
             ) == PackageManager.PERMISSION_GRANTED

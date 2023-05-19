@@ -16,9 +16,9 @@ import java.util.*
 import kotlin.random.Random
 
 
-class MessagingUtils {
-
-   private val msgInstance= FirebaseMessaging.getInstance()
+class MessagingUtils(
+    private val msgInstance: FirebaseMessaging
+) {
 
     fun logToken(tag:String="FCM token"){
         msgInstance.token.addOnCompleteListener { task ->

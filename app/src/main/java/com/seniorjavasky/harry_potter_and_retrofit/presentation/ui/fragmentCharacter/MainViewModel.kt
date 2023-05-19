@@ -8,10 +8,11 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TAG = "MainViewModel555"
 
-class MainViewModel(
+class MainViewModel @Inject constructor(
     private val getCharacterUseCase: GetCharacterUseCase
 ) : ViewModel() {
 
