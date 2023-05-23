@@ -11,7 +11,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.ActivityMainWithDrawerBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWithDrawerBinding
@@ -25,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         App.INSTANCE.permissionService.initMainActivityContext(this)
         App.INSTANCE.permissionService.checkPermissions()
-
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment_container) as NavHostFragment

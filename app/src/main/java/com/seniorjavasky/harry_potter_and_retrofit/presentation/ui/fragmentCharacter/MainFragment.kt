@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.*
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentMainBinding
-import com.seniorjavasky.harry_potter_and_retrofit.di.ContextModule
-import com.seniorjavasky.harry_potter_and_retrofit.di.DaggerApplicationComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 private const val TAG = "MainFragment555"
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     @Inject
@@ -24,11 +24,6 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.injectMainFragment(this)
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

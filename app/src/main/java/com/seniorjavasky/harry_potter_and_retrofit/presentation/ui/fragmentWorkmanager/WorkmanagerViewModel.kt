@@ -11,7 +11,9 @@ import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.CashCharacterListUseCase
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.UploadListUseCase
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.worker.CasherDataWorker
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+
 
 class WorkmanagerViewModel @Inject constructor(
     val context: Application

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterItem
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.GetCharacterListUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

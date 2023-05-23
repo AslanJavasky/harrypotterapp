@@ -9,8 +9,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.ForumItem
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.MainActivity
+import javax.inject.Inject
 
-class FirebaseUtils(
+class FirebaseUtils (
     private val dbFirebase: FirebaseDatabase,
     internal val crashlytics: FirebaseCrashlytics,
     internal val authUtils: AuthUtils
