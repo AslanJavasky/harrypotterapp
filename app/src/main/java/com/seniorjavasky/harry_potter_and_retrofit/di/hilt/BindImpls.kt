@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.di
+package com.seniorjavasky.harry_potter_and_retrofit.di.hilt
 
 import com.seniorjavasky.harry_potter_and_retrofit.data.CharacterRepositoryImpl
 import com.seniorjavasky.harry_potter_and_retrofit.data.ForumRepositoryImpl
@@ -9,8 +9,12 @@ import com.seniorjavasky.harry_potter_and_retrofit.domain.repository.ForumReposi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 interface BindImpls {
 
     @Binds

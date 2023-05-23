@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.seniorjavasky.harry_potter_and_retrofit.data.local.dao.CharacterDao
 import com.seniorjavasky.harry_potter_and_retrofit.data.local.entity.CharacterDbModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Database(entities = [CharacterDbModel::class], version = 1)
 abstract class CharacterDatabase : RoomDatabase() {
@@ -16,7 +17,7 @@ abstract class CharacterDatabase : RoomDatabase() {
         private const val DB_NAME = "characters.db"
         private val LOCK = Any()
 
-        fun getInstance(application: Application): CharacterDatabase {
+        fun getInstance(@ApplicationContext application: Application): CharacterDatabase {
             INSTANCE?.let { db ->
                 return db
             }

@@ -1,4 +1,4 @@
-package com.seniorjavasky.harry_potter_and_retrofit.di
+package com.seniorjavasky.harry_potter_and_retrofit.di.hilt
 
 import android.app.Application
 import com.firebase.ui.auth.AuthUI
@@ -19,9 +19,13 @@ import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentForum
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentForum.ForumViewModelFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 
 @Module
-class FirebaseModule {
+@InstallIn(SingletonComponent::class)
+class HiltFirebaseModule {
 
     @Provides
     fun provideFirebaseDb(): FirebaseDatabase {

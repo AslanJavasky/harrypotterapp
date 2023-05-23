@@ -9,11 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentCharacterListBinding
-import com.seniorjavasky.harry_potter_and_retrofit.di.ContextModule
-import com.seniorjavasky.harry_potter_and_retrofit.di.DaggerApplicationComponent
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CharacterListFragment : Fragment() {
 
     @Inject
@@ -25,11 +25,6 @@ class CharacterListFragment : Fragment() {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.injectCharacterListFragment(this)
-        super.onCreate(savedInstanceState)
-    }
 
 
     override fun onCreateView(

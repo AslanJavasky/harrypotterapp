@@ -12,8 +12,9 @@ import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentWorkmanagerBinding
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentForum.ForumViewModelFactory
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.worker.CasherDataWorker
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class WorkmanagerFragment : Fragment() {
 
     @Inject
@@ -26,11 +27,6 @@ class WorkmanagerFragment : Fragment() {
 
     private var _binding: FragmentWorkmanagerBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.injectWorkmanagerFragment(this)
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

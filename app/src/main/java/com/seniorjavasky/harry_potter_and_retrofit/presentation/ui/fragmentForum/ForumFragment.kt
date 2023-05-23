@@ -9,11 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.databinding.FragmentForumBinding
-import com.seniorjavasky.harry_potter_and_retrofit.di.ContextModule
-import com.seniorjavasky.harry_potter_and_retrofit.di.DaggerApplicationComponent
 import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.activities.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class ForumFragment : Fragment() {
 
     @Inject
@@ -28,10 +27,6 @@ class ForumFragment : Fragment() {
 
     private lateinit var adapter: ForumAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.injectForumFragment(this)
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

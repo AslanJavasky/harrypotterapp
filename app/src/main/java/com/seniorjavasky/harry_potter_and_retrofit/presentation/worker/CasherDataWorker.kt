@@ -1,21 +1,22 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation.worker
 
 import android.content.Context
+import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import com.seniorjavasky.harry_potter_and_retrofit.App
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.data.CharacterRepositoryImpl
-import com.seniorjavasky.harry_potter_and_retrofit.data.local.database.CharacterDatabase
-import com.seniorjavasky.harry_potter_and_retrofit.data.mappers.CharacterMapper
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.CashCharacterListUseCase
 import com.seniorjavasky.harry_potter_and_retrofit.domain.usecase.UploadListUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class CasherDataWorker(
-    context: Context,
-    params: WorkerParameters,
+@HiltWorker
+class CasherDataWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted params: WorkerParameters,
     private val uploadDataUseCase: UploadListUseCase,
     private val cashDataUseCase: CashCharacterListUseCase
 ) : CoroutineWorker(context, params) {

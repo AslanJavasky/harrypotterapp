@@ -11,7 +11,7 @@ class Component {
 
         return TripToHogwarts(
             freshmanSet = FreshmanSet(
-                MagicWand(CoreOfWand(), WoodOfWand()),
+//                MagicWand(CoreOfWand(), WoodOfWand()),
                 book,
                 owl
             ),
