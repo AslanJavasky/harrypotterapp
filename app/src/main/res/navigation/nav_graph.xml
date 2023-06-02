@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_paging_example">
+    app:startDestination="@id/navigation_character">
     <fragment
         android:id="@+id/navigation_character"
         android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacter.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+    />
     <fragment
         android:id="@+id/navigation_character_list"
         android:name="com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacterList.CharacterListFragment"

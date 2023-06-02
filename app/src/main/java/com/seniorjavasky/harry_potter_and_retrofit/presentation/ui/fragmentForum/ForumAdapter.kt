@@ -21,7 +21,6 @@ class ForumAdapter(
                 LayoutInflater.from(parent.context).inflate(R.layout.forum_item, parent, false)
             )
         )
-
     }
 
     override fun onBindViewHolder(

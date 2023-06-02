@@ -1,15 +1,14 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentPaging
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.seniorjavasky.harry_potter_and_retrofit.R
-import com.seniorjavasky.harry_potter_and_retrofit.databinding.CharacterItemBinding
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterPagingItem
+import com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacterList.CharacterItemCompose
 
 class CharacterPagingListAdapter
     : PagingDataAdapter<CharacterPagingItem,
@@ -20,9 +19,9 @@ class CharacterPagingListAdapter
         parent: ViewGroup, viewType: Int
     ): CharacterListViewHolder {
 
-        val binding=
-            CharacterItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return CharacterListViewHolder(binding)
+        return CharacterListViewHolder(
+            ComposeView(parent.context)
+        )
 
     }
 
@@ -33,15 +32,14 @@ class CharacterPagingListAdapter
         characterItem?.let { holder.bind(it) }
     }
     inner class CharacterListViewHolder(
-        val binding:CharacterItemBinding) : RecyclerView.ViewHolder(binding.root){
+       private val composeView: ComposeView
+        ) : RecyclerView.ViewHolder(composeView){
+
             fun bind(characterPagingItem: CharacterPagingItem){
-                if(characterPagingItem.imageUrl != null){
-                    binding.imageCharacter.load(characterPagingItem.imageUrl)
-                }else{
-                    binding.imageCharacter.load(R.drawable.empty_face)
+
+                composeView.setContent {
+                    CharacterItemCompose(characterPagingItem= characterPagingItem)
                 }
-                binding.tvName.text = characterPagingItem.name ?: "N/D"
-                binding.tvHouse.text = characterPagingItem.hogwartsHouse ?: "N/D"
             }
         }
 

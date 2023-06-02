@@ -1,12 +1,10 @@
 package com.seniorjavasky.harry_potter_and_retrofit.presentation.ui.fragmentCharacterList
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.seniorjavasky.harry_potter_and_retrofit.databinding.CharacterItemBinding
 import com.seniorjavasky.harry_potter_and_retrofit.domain.model.CharacterItem
 
 class CharacterListAdapter
@@ -16,24 +14,29 @@ class CharacterListAdapter
         parent: ViewGroup, viewType: Int
     ): CharacterListViewHolder {
 
-        val binding=
-            CharacterItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return CharacterListViewHolder(binding)
-
+        val composeView = ComposeView(parent.context)
+        return CharacterListViewHolder(composeView)
     }
 
     override fun onBindViewHolder(
         holder: CharacterListViewHolder, position: Int
     ) {
         val characterItem = getItem(position)
-        holder.binding.imageCharacter.load(characterItem.imageUrl)
-        holder.binding.tvName.text = characterItem.name
-        holder.binding.tvHouse.text = characterItem.hogwartsHouse
-
+        holder.bind(characterItem)
     }
 }
 
-class CharacterListViewHolder(val binding:CharacterItemBinding) : RecyclerView.ViewHolder(binding.root)
+class CharacterListViewHolder(
+    private val composeView: ComposeView
+) : RecyclerView.ViewHolder(composeView) {
+
+    fun bind(characterItem: CharacterItem) {
+        composeView.setContent {
+            CharacterItemCompose(character=characterItem)
+        }
+
+    }
+}
 
 val callback = object : DiffUtil.ItemCallback<CharacterItem>() {
     override fun areItemsTheSame(oldItem: CharacterItem, newItem: CharacterItem): Boolean {
